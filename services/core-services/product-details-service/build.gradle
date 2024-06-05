@@ -40,6 +40,7 @@ dependencies {
 	modules {
 		module("org.springframework.boot:spring-boot-starter-tomcat") {
 			replacedBy("org.springframework.boot:spring-boot-starter-jetty", "Use Jetty instead of Tomcat")
+			//replacedBy("org.springframework.boot:spring-boot-starter-undertow", "Use undertow instead of Tomcat")
 		}
 	}
 }
