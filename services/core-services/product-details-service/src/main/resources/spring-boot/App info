@@ -1,0 +1,62 @@
+Spring boot
+
+Learn about dependecy injection and Application context here , this article is really good.
+https://www.marcobehler.com/guides/spring-framework
+
+*Spring Boot is a Spring module that provides the RAD (Rapid Application Development) feature to the Spring framework.
+
+*Spring Boot is a project that is built on the top of the Spring Framework.
+ It provides an easier and faster way to set up, configure, and run both simple and web-based applications.
+
+Spring boot ia s combination of Spring and embedded servers(tomcat by default) and spring boot removes the
+need of XML configuration for beans and thus reducing lot of boiler plate code.
+
+Spring boot has lot advantages:
+
+The main goal of Spring Boot is to reduce development, unit test, and integration test time.
+
+Provides Opinionated Development approach
+Avoids defining more Annotation Configuration
+Avoids writing lots of import statements
+Avoids XML Configuration.
+
+By providing or avoiding the above points, Spring Boot Framework reduces Development time, Developer Effort, and increases productivity.
+
+Disadvantages of spring boot
+
+Spring Boot can use dependencies that are not going to be used in the application.
+These dependencies increase the size of the application.
+
+Spring boot Auto-Configuration
+
+This is the magical feature which makes spring boot apart from spring. This feature @EnableAutoConfiguration which is part of @SpringBootApplication
+confiures all the required configuration to run your spring boot application. With out this feature i.e usually in spring applications you have to define
+configurations for everything. Even for dispatcher servlet also. This can be avoided with spring boot auto configuration
+
+What it does exactly ?
+If you observe if you add Spring data jpa dependency and my sql dependency and required DB props in app.props then automatically connection is established
+If u change the DB and the configuration then the connection is automatically shifted to another DB which you have shifted.
+so for example if you have added MySql dependency and required configs then
+
+ Spring boot auto configuration automatically checks for the DataSource.class (from Spring-Data-Jpa dependency)
+                                       |
+                                       |  (true)
+                                       v
+ Spring boot auto configuration automatically checks for the MySqlConnector.class (from my-sql dependency)
+                                       |
+                                       |  (true)
+                                       v
+  Spring boot auto configuration automatically checks for required configs props in application.props
+                                        |
+                                        |  (true)
+                                        v
+   Spring boot auto configuration automatically connects app to DB
+
+   All this work is automatically done by spring boot autoconfiguration so that you don't need to do all this configuration
+   All this set of things to check are kept in spring-boot-starter-auto-configuraton jar and under that Meta-Inf folder and in that Spring factories
+   All this checking is achieved by using @Conditional group annotations which checks for the class or props or anything we specify
+
+You should definately visit these articles
+   please go through this article first : https://www.scaler.com/topics/spring-boot/spring-boot-auto-configuration/
+
+   and then go through this article : https://www.marcobehler.com/guides/spring-boot-autoconfiguration
