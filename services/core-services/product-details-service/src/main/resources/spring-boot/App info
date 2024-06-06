@@ -1,5 +1,27 @@
 Spring boot
 
+Spring:
+At its core, Spring framework is really just a dependency injection container, with a couple of convenience layers (think: database access, proxies, aspect-oriented programming, RPC, a web mvc framework) added on top.
+It helps you build Java application faster and more conveniently.
+
+Spring MVC:
+On a very high-level it allows you to turn your Spring application into a web application with the help of a DispatcherServlet that routes to @Controller classes.
+These can be RestControllers (where you send XML or JSON to the client) or good old HTML Controllers where you generate HTML with frameworks like Thymeleaf, Velocity or Freemarker.
+
+Spring Boot:
+Spring offers you the ability to read in .properties files from a variety of places, e.g. with the help of @PropertySource annotations. It also offers you the ability to write JSON REST controllers with the help of its Web MVC framework.
+The issue is, you have to write and configure all these individual pieces yourself.
+Spring Boot, on the other hand, takes these single pieces and bundles them up together.
+Example:
+Always and automatically look for application.properties files in various places and read them in.
+Always booting up an embedded Tomcat so you can immediately see the results of writing your @RestControllers.
+Automatically configuring everything for you to send/receive JSON, without needing to worry a ton about specific Maven/Gradle dependencies.
+All, by running a main method in a Java class, which is annotated with the @SpringBootApplication annotation.
+Even better, Spring Boot offers Maven/Gradle plugins that let you package up your application into a .jar file,
+which you can run like this: java -jar mySpringBootApp.jar
+
+So, Spring Boot is all about taking the existing Spring framework parts, pre-configuring and packaging them up - with as little development work needed as possible.
+
 Learn about dependecy injection and Application context here , this article is really good.
 https://www.marcobehler.com/guides/spring-framework
 

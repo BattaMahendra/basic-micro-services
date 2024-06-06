@@ -43,6 +43,10 @@ dependencies {
 			//replacedBy("org.springframework.boot:spring-boot-starter-undertow", "Use undertow instead of Tomcat")
 		}
 	}
+
+	// https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
+	implementation 'org.apache.tomcat:tomcat-catalina:9.0.30'
+
 }
 
 tasks.named('test') {
