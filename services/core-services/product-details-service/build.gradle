@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -31,6 +31,11 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	//for custom html views
+	// https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
+	implementation 'org.thymeleaf:thymeleaf'
+
 
 	//if you want to change the server of spring boot app other than tomcat
 	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
@@ -45,7 +50,7 @@ dependencies {
 	}
 
 	// https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
-	implementation 'org.apache.tomcat:tomcat-catalina:9.0.30'
+	//implementation 'org.apache.tomcat:tomcat-catalina:9.0.30'
 
 }
 
