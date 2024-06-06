@@ -3,6 +3,17 @@ Spring boot
 Learn about dependecy injection and Application context here , this article is really good.
 https://www.marcobehler.com/guides/spring-framework
 
+Inversion Of Control : It is a design principle through which we can create and maintain the objects in a container away
+from the original code implementaion.Which means we are taking control of flow of program(creating and maintaining beans)
+from the original code and doing it with a spring container. IOC can be achieved through Dependency Injection, Factory design
+pattern and Service locator design pattern.
+
+Dependency Injection: It is a design pattern with which we achieve IOC.
+Dependency injection generally means passing a dependent object as a parameter to a method, rather than having the method create the dependent object.
+What it means in practice is that the method does not have a direct dependency on a particular implementation; any implementation that meets the requirements can be passed as a parameter.
+With this implementation of objects defines their dependencies. And spring makes it available.This leads to loosely coupled application development.
+Quick Example:EMPLOYEE OBJECT WHEN CREATED,IT WILL AUTOMATICALLY CREATE ADDRESS OBJECT (if address is defines as dependency by Employee object)*.
+
 *Spring Boot is a Spring module that provides the RAD (Rapid Application Development) feature to the Spring framework.
 
 *Spring Boot is a project that is built on the top of the Spring Framework.
