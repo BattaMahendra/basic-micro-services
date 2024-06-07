@@ -36,6 +36,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
 	implementation 'org.thymeleaf:thymeleaf'
 
+	//for using xml configs in application
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+
+
 
 	//if you want to change the server of spring boot app other than tomcat
 	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
