@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,12 @@ public class AppServiceImpl implements AppService {
     public List<Employee> getAllEmployees(){
         return employeeRepository.findAll();
     }
-
+    @Transactional
     public Employee addAnEmployee(Employee employee){
-        return employeeRepository.save(employee);
+        employeeRepository.save(employee);
+        //written this if statement to test and understand @Transactional annotation
+        if (employee.getEmp_id() == 111) throw new RuntimeException("Exception is thrown");
+        return employee;
     }
 
 
