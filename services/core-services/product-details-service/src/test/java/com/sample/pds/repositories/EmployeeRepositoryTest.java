@@ -16,10 +16,11 @@ import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
-@ExtendWith(MockitoExtension.class)
+//@ExtendWith(MockitoExtension.class)
+@DataJpaTest
 public class EmployeeRepositoryTest {
 
-    @InjectMocks
+    @Autowired
     private EmployeeRepository orderRepository;
 
 

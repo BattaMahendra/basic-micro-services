@@ -21,7 +21,7 @@ public class AppRestController {
     @Autowired
     AppServiceImpl appService;
 
-    @GetMapping("/all")
+    @GetMapping(value = "/all",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getAllEmployee(){
         return appService.getAllEmployees();
     }
