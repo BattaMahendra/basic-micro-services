@@ -29,7 +29,7 @@ public class LoggingAdvice {
         String methodName = pjp.getSignature().getName();
         String className = pjp.getTarget().getClass().toString();
         Object[] array = pjp.getArgs();
-        log.info("method invoked " + className + " : " + methodName + "()" + "arguments : "
+        log.info("Method invoked " + className + " : " + methodName + "()" + "arguments : "
                 + mapper.writeValueAsString(array));
         Object object = pjp.proceed();
         log.info(className + " : " + methodName + "()" + "Response : "
