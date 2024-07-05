@@ -39,7 +39,10 @@ dependencies {
 
 	//for using xml configs in application
 	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
-
+	//security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'com.okta.spring:okta-spring-boot-starter:2.1.2'
 
 
 	//if you want to change the server of spring boot app other than tomcat
