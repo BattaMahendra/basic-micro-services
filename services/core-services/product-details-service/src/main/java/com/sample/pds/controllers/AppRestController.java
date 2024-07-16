@@ -23,6 +23,12 @@ public class AppRestController {
 
     @GetMapping(value = "/all",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getAllEmployee(){
+        System.out.println("Returns JSON mapping");
+        return appService.getAllEmployees();
+    }
+    @GetMapping(value = "/all2",produces = MediaType.APPLICATION_XML_VALUE)
+    public List<Employee> getAllEmployeeInXMLFormat(){
+        System.out.println("Returns XML mapping");
         return appService.getAllEmployees();
     }
 
