@@ -2,10 +2,7 @@ package com.sample.pds.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.*;
 
 @Configuration
 public class Config {
@@ -16,6 +13,7 @@ public class Config {
     @Primary
     @Profile("dev")
     public java.lang.String getWelcomeString(){
+        System.out.println("We are in configuration class and initializing String bean");
         return "Welcome Bean";
     }
 
@@ -23,6 +21,7 @@ public class Config {
     @Qualifier("sendOffBean")
     @Profile("dev")
     public java.lang.String sendOffString(){
+        System.out.println("We are in configuration class and initializing String bean");
         System.out.println("config class bean address "+System.identityHashCode(testingConfigurationClass()));
         System.out.println("config class bean address "+System.identityHashCode(testingConfigurationClass()));
 
@@ -53,7 +52,18 @@ public class Config {
     * */
     @Bean
     public String testingConfigurationClass(){
-        System.out.println("We are in configuration class");
+        System.out.println("We are in configuration class and initializing String bean");
         return new String("new");
     }
+
+    /*
+    * Usually all beans get initialized once the application starts up
+    * This will be initialized only when it is called */
+    @Bean
+    @Lazy
+    public String lazyBean(){
+        System.out.println("We are in configuration class with lazy bean");
+        return new String("lazy");
+    }
+
 }

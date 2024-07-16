@@ -21,15 +21,17 @@ public class AppController
     *
     * */
     @Bean
-    public String testComponentClass(){
+    public String testBeanInComponentClass(){
         System.out.println("We are in controller class");
         return new String("news");
     }
 
     @Bean
-    public int testAboveAddress(){
-        System.out.println("controller class bean address "+System.identityHashCode(testComponentClass()));
-        System.out.println("controller class bean address "+System.identityHashCode(testComponentClass()));
+    public int testAboveBeanAddress(){
+        /*
+        * Here we are testing the address of above bean whether it is singleton instance or not*/
+        System.out.println("controller class bean address "+System.identityHashCode(testBeanInComponentClass()));
+        System.out.println("controller class bean address "+System.identityHashCode(testBeanInComponentClass()));
 
         return 1;
     }

@@ -18,12 +18,12 @@ public class LoggingAdvice {
 
 
 
-    @Pointcut(value="execution(* com.sample.pds.*.*.*(..) )")
-    public void myPointcut() {
+//    @Pointcut(value="execution(* com.sample.pds.*.*.*(..) )")
+//    public void myPointcut() {
+//
+//    }
 
-    }
-
-    @Around("myPointcut()")
+  //  @Around("myPointcut()")
     public Object applicationLogger(ProceedingJoinPoint pjp) throws Throwable {
         ObjectMapper mapper = new ObjectMapper();
         String methodName = pjp.getSignature().getName();

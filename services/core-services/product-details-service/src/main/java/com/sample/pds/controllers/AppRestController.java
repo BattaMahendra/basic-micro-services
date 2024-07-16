@@ -23,6 +23,23 @@ public class AppRestController {
 
     @GetMapping(value = "/all",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getAllEmployee(){
+        System.out.println("Returns JSON mapping");
+        return appService.getAllEmployees();
+    }
+    @GetMapping(value = "/all2",produces = MediaType.APPLICATION_XML_VALUE)
+    public List<Employee> getAllEmployeeInXMLFormat(){
+        System.out.println("Returns XML mapping");
+        return appService.getAllEmployees();
+    }
+
+    /*
+    * Here although we didn't specify any produces statement it by default returns xml because in build.gradle
+    * we have added jackson xml dependency which forces rest controller default behaviour to xml format
+    *
+    * Actually in spring boot the default behaviour of Rest Controller is json format if you don't specify jackson xml dependency*/
+    @GetMapping(value = "/all3")
+    public List<Employee> getAllEmployeeInDefaultFormat(){
+        System.out.println("Returns XML mapping");
         return appService.getAllEmployees();
     }
 

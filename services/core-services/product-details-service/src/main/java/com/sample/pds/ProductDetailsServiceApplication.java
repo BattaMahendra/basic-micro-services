@@ -1,17 +1,20 @@
 package com.sample.pds;
 
+import com.sample.pds.configuration.TestConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 
 import java.util.HashSet;
 
 @SpringBootApplication
-
 @ComponentScan(basePackages = {"com.sample.pds"})
+//this annotation is used to load properties into fields of TestConfig class
+@EnableConfigurationProperties(TestConfig.class)
 public class ProductDetailsServiceApplication {
 
 

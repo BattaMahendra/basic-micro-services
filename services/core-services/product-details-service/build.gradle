@@ -32,13 +32,16 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	//for custom html views
 	// https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
-	implementation 'org.thymeleaf:thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 	//for using xml configs in application
-	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+	//if you place this then by default rest controller returns xml values
+	//implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+
 	//security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
