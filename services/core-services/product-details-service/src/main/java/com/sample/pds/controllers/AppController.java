@@ -38,7 +38,7 @@ public class AppController
 
     @GetMapping("/welcome")
     public String welcome(){
-        return "Welcome";
+        return "Welcome.html";
     }
 
 
