@@ -10,7 +10,7 @@ public class Config {
 
 
     @Bean
-    @Primary
+    @Primary  // when there are same return types in multiple beans then this is the one referenced primarily
     @Profile("dev")
     public java.lang.String getWelcomeString(){
         System.out.println("We are in configuration class and initializing String bean");
@@ -18,7 +18,7 @@ public class Config {
     }
 
     @Bean
-    @Qualifier("sendOffBean")
+    @Qualifier("sendOffBean")   // Used to differentiate between multiple beans of same return type
     @Profile("dev")
     public java.lang.String sendOffString(){
         System.out.println("We are in configuration class and initializing String bean");
@@ -65,5 +65,6 @@ public class Config {
         System.out.println("We are in configuration class with lazy bean");
         return new String("lazy");
     }
+
 
 }
