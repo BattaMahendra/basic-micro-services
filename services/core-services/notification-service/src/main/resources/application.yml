@@ -34,5 +34,5 @@ spring:
 
 logging:
   level:
-    org.springframework.kafka: DEBUG
-    com.example: DEBUG
+    org.springframework.kafka: INFO
+    com.example: INFO

@@ -1,14 +1,26 @@
 package com.mahi.order.entity;
 
+import lombok.*;
 
-import jakarta.persistence.Embeddable;
 
-@Embeddable
+
+
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Product {
+
+
+    private Long id;
+
+    private String title;
+    private Double price;
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "\nProduct{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", price=" + price +
@@ -18,10 +30,6 @@ public class Product {
                 '}';
     }
 
-    private Long id;
-
-    private String title;
-    private Double price;
     private String description;
     private String category;
     private String image;
