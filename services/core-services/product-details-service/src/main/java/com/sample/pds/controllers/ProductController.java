@@ -21,7 +21,9 @@ public class ProductController {
 
     // Get all products
     @GetMapping
-    public List<Product> getAllProducts() {
+    public List<Product> getAllProducts() throws InterruptedException {
+
+//        Thread.sleep(7000);
         return productService.getAllProducts();
     }
 
@@ -33,7 +35,10 @@ public class ProductController {
 
     // Update product
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) throws InterruptedException {
+
+        //initiating sleep
+       // Thread.sleep(7000);
         return productService.updateProduct(id, product);
     }
 

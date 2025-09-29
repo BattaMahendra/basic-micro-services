@@ -14,4 +14,12 @@ public interface ProductFeign {
 }
 
 /**
- * Interview Questions on */
+ * Interview Questions on Feign
+ *
+ * 1. How to declare feign clients - syntax
+ * 2. Why feign over rest template ?
+ * 3. How do you handle exceptions in Feign client ?
+ * 4. How do you handle connect time-outs and read time-outs in feign client
+ * 5. How do you implement custom error handling in Feign?
+ * 6. Explain the use of a RequestInterceptor. Can you provide a practical use case?
+ * */

@@ -12,7 +12,11 @@ import com.mahi.order.util.ApiClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Service
@@ -21,6 +25,9 @@ public class OrderService {
     private  ApiClient apiClient;
     private OrderRepository repository;
     private Producer producer;
+
+    @Autowired
+    private WebClient webClient;
 
     @Autowired
     private ProductFeign productFeign;
@@ -67,6 +74,7 @@ public class OrderService {
 
         return orderDetail;
     }
+
 
 
 }
