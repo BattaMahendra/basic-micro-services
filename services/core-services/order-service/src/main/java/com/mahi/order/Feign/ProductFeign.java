@@ -12,3 +12,6 @@ public interface ProductFeign {
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id);
 }
+
+/**
+ * Interview Questions on */

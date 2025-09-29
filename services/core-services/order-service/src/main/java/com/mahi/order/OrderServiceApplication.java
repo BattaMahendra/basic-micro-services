@@ -7,6 +7,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Duration;
+
 @SpringBootApplication
 @EnableFeignClients
 public class OrderServiceApplication {
@@ -16,8 +18,11 @@ public class OrderServiceApplication {
 	}
 
 	@Bean
-	public RestTemplate getRestTemplate(){
-		return new RestTemplate();
+	public RestTemplate getRestTemplate(RestTemplateBuilder restTemplateBuilder){
+		return restTemplateBuilder
+				.setConnectTimeout(Duration.ofSeconds(5))
+				.setReadTimeout(Duration.ofSeconds(5))
+				.build();
 	}
 
 }
