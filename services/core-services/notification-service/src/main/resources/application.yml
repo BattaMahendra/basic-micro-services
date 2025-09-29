@@ -1,0 +1,38 @@
+server:
+  port: 803
+
+
+spring:
+  application:
+    name: notification-service
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      retries: 3
+      properties:
+        linger.ms: 5
+        enable.idempotence: true
+
+    consumer:
+      group-id: basic_microservices_group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
+      properties:
+        max-poll-records: 500
+        fetch.min.bytes: 50000
+
+#    listener:
+#      ack-mode: manual
+#      missing-topics-fatal: false
+
+logging:
+  level:
+    org.springframework.kafka: DEBUG
+    com.example: DEBUG
