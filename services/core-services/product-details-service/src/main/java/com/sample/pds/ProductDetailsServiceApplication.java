@@ -7,6 +7,7 @@ import org.springframework.boot.actuate.autoconfigure.security.servlet.Managemen
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
 
 import java.util.HashSet;
@@ -15,6 +16,8 @@ import java.util.HashSet;
 @ComponentScan(basePackages = {"com.sample.pds"})
 //this annotation is used to load properties into fields of TestConfig class
 @EnableConfigurationProperties(TestConfig.class)
+
+@EnableEurekaClient // required for lower spring boot versions
 public class ProductDetailsServiceApplication {
 
 

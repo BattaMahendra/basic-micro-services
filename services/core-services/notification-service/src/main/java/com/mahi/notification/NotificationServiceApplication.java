@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+//@EnableEurekaClient  //not needed for higher spring boot versions
 public class NotificationServiceApplication {
 
 	public static void main(String[] args) {
