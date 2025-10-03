@@ -2,6 +2,8 @@ server:
   port: 801
 
 spring:
+  application:
+    name: user-service
   datasource:
     url: jdbc:h2:mem:user-details;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
@@ -19,3 +21,15 @@ spring:
 
 # Optional: format SQL in console for readability
 spring.jpa.properties.hibernate.format_sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true # Now Eureka will register your service as http://192.168.x.x:801 (your LAN IP) instead of Batta_Mahendra:801.
+
+    # the Batta_Mahendra is your computers host name and generally it should work but
+    # underscore(_) is not allowed in domain name. so instead of ip address you can also use localhost
+
+    # means localhost:801 == Batta_Mahendra:801 == 192.168.1.5:801
