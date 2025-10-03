@@ -2,11 +2,15 @@ package com.mahi.order.Feign;
 
 
 import com.mahi.order.entity.Product;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "product-details-service", url = "http://localhost:808/products/")
+/*
+* If you are using Eureka server for registry then in the below line you can omit url part.
+* As feign automatically configures the url from eureka registry*/
+@FeignClient(name = "product-details-service", url = "${product.base-uri}" )
 public interface ProductFeign {
 
     @GetMapping("/{id}")

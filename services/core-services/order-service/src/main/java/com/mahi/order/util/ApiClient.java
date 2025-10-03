@@ -19,7 +19,7 @@ public class ApiClient {
     public User getUserDetails(long id){
 
         User user = null;
-        String uri = "http://user-service/users/"+id;
+        String uri = baseUri+id;
         ResponseEntity<User> entity = restTemplate.getForEntity(uri, User.class);
 
         System.out.println("User extracted for id : "+id+" is :"+ entity.getBody());
