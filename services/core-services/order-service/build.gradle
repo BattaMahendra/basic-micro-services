@@ -46,6 +46,14 @@ dependencies {
 	// ✅ Add this line for RestTemplate load balancing
 	implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
 
+	// 1. Spring Boot Actuator
+	// Exposes operational information about your running application (health, metrics, etc.)
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+	// 2. Spring Cloud Resilience4j Circuit Breaker
+	// Provides circuit breaker functionality to handle failures gracefully
+	implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+
 }
 
 //required for downloading feign client libraries and eureka dependencies
