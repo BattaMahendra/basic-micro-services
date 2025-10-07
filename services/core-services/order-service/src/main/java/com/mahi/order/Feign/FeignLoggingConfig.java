@@ -10,6 +10,6 @@ public class FeignLoggingConfig {
     @Bean
     Logger.Level feignLoggerLevel() {
         // Levels: NONE, BASIC, HEADERS, FULL
-        return Logger.Level.FULL;
+        return Logger.Level.BASIC;
     }
 }

@@ -1,0 +1,31 @@
+
+Generally an enterprise level spring boot app contain
+
+Gateway <--> service discovery
+          |
+          |
+          V
+    Spring security
+          |
+          V
+ Any spring boot APP (a typical service)
+          |
+          |
+          V
+    Custom Filters
+          |
+          |
+          V
+    Custom Interceptors (logging & filtering incoming and outgoing requests and responses)
+          |
+          |
+          V
+     Validating incoming requests
+          |
+          |
+          V
+    Centralized logging ( configured with logback files etc..)
+          |
+          |
+          V
+     Custom Exceptions (Global exception handling)
