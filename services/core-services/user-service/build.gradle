@@ -39,6 +39,16 @@ dependencies {
 
 	//Eureka client side dependency
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+	//lombok
+	compileOnly("org.projectlombok:lombok:1.18.42")
+	annotationProcessor("org.projectlombok:lombok:1.18.42")
+
+	//For automatic mapping of DTOs
+	implementation 'org.modelmapper:modelmapper:3.2.4'
+
+	//For validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {

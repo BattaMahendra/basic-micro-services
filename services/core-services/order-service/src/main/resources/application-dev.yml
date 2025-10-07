@@ -50,7 +50,7 @@ resilience4j:
             - java.lang.RuntimeException
               # Exceptions to ignore (won’t be retried)
         ignoreExceptions:
-            - com.mahi.order.Exception.OrderServiceException
+            - com.mahi.order.exception.OrderServiceException
               # Whether to fail immediately if max attempts are reached
         failAfterMaxAttempts: true
               # Event buffer size (for metrics)

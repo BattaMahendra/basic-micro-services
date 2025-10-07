@@ -1,68 +1,82 @@
 package com.mahi.user.controller;
 
-
+import com.mahi.user.dto.UserRequestDto;
+import com.mahi.user.dto.UserResponseDto;
 import com.mahi.user.entity.User;
-import com.mahi.user.repository.UserRepository;
-import jakarta.annotation.PostConstruct;
+import com.mahi.user.mapper.UserMapper;
+import com.mahi.user.service.UserService;
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @RequestMapping("/users")
+@Validated  // enables validation for @PathVariable and @RequestParam
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
+    private final UserMapper userMapper;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService, UserMapper userMapper) {
+        this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     // Create user
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+    public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserRequestDto userRequestDto) {
+        String correlationId = UUID.randomUUID().toString();
+        log.info("[{}] Creating new user: {}", correlationId, userRequestDto.getEmail());
+
+        User user = userMapper.toEntity(userRequestDto);
+        User savedUser = userService.createUser(user);
+        UserResponseDto responseDto = userMapper.toDto(savedUser);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
     // Get all users
     @GetMapping
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public ResponseEntity<List<UserResponseDto>> getAllUsers() {
+        log.info("Fetching all users");
+        List<UserResponseDto> users = userService.getAllUsers()
+                .stream()
+                .map(userMapper::toDto)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(users);
     }
 
-    // Get user by id
+    // Get user by ID
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userRepository.findById(id).orElseThrow();
+    public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long id) {
+        log.info("Fetching user by ID: {}", id);
+        User user = userService.getUserById(id);
+        return ResponseEntity.ok(userMapper.toDto(user));
     }
 
     // Update user
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User userDetails) {
-        return userRepository.findById(id).map(user -> {
-            user.setName(userDetails.getName());
-            user.setEmail(userDetails.getEmail());
-            user.setAge(userDetails.getAge());
-            return userRepository.save(user);
-        }).orElseThrow();
+    public ResponseEntity<UserResponseDto> updateUser(
+            @PathVariable Long id, @Valid @RequestBody UserRequestDto userRequestDto) {
+        log.info("Updating user with ID: {}", id);
+        User updatedUser = userService.updateUser(id, userMapper.toEntity(userRequestDto));
+        return ResponseEntity.ok(userMapper.toDto(updatedUser));
     }
 
     // Delete user
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userRepository.deleteById(id);
-    }
-
-    @PostConstruct
-    public void loadUsers() {
-        if (userRepository.count() == 0) {
-            List<User> users = new ArrayList<>();
-            for (int i = 1; i <= 20; i++) {
-                users.add(new User(null, "User" + i, "user" + i + "@gmail.com", 20 + i));
-            }
-            userRepository.saveAll(users);
-            System.out.println("✅ 20 sample users loaded into H2 database!");
-        }
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        log.info("Deleting user with ID: {}", id);
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
     }
 }
