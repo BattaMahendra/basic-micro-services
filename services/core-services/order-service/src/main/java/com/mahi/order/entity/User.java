@@ -2,8 +2,9 @@ package com.mahi.order.entity;
 
 
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
 
-@Embeddable
+
 public class User {
 
     private Long id;

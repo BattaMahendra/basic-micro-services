@@ -1,6 +1,6 @@
 package com.mahi.order.service;
 
-import com.mahi.order.Exception.OrderServiceException;
+import com.mahi.order.exception.OrderServiceException;
 import com.mahi.order.Feign.ProductFeign;
 import com.mahi.order.Repo.OrderRepository;
 import com.mahi.order.config.Producer;
@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Service
@@ -49,11 +46,14 @@ public class OrderService {
         try {
             // order.setId(new Random().nextLong());
              user = apiClient.getUserDetails(userId);
-             product = productFeign.getProductById((long) productId);
+            product = getProduct((long) productId);
 
             System.out.println("Queried results for\n user:\n "+ user+ "\n product: "+product);
         } catch (Exception e) {
             throw new OrderServiceException(e.getMessage(),e.getCause());
+        }
+        if(user.getId()==null || user.getId()==0L){
+            throw new OrderServiceException("User not found with id: "+userId);
         }
         if(user != null && user.getId() == userId && product!=null){
             order.setUserId((long) userId);
@@ -61,7 +61,7 @@ public class OrderService {
             order = repository.save(order);
 
         }
-        if(!ObjectUtils.isEmpty(order)){
+        if(!ObjectUtils.isEmpty(order) && order.getId()!=null){
             order.setOrderDate(LocalDateTime.now());
             producer.sendMessage(order.toString());
 
@@ -75,6 +75,11 @@ public class OrderService {
         return orderDetail;
     }
 
+    public Product getProduct(long productId) {
+        Product product;
+        product = productFeign.getProductById(productId);
+        return product;
+    }
 
 
 }

@@ -1,0 +1,63 @@
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: health
+  health:
+    circuitbreakers:
+      enabled: true
+
+#resilience-4j props
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      user-service:
+        sliding-window-type: COUNT_BASED
+        failure-rate-threshold: 50
+        minimum-number-of-calls: 5
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 5s
+        permitted-number-of-calls-in-half-open-state: 3
+        sliding-window-size: 10
+        register-health-indicator: true
+
+  timelimiter:
+    instances:
+      product-details-service:
+        timeoutDuration: 2s
+
+  retry:
+    instances:
+      product-details-service:
+              # Number of retry attempts (including the first failed attempt)
+        maxAttempts: 3
+              # Wait duration between retries
+        waitDuration: 1s
+              # Exponential backoff (optional)
+        enableExponentialBackoff: false
+        exponentialBackoffMultiplier: 2
+              # Optional random jitter to avoid retry bursts
+        enableRandomizedWait: false
+        randomizedWaitFactor: 0.5
+              # Exceptions on which to retry
+        retryExceptions:
+            - java.io.IOException
+            - java.net.ConnectException
+            - java.lang.RuntimeException
+              # Exceptions to ignore (won’t be retried)
+        ignoreExceptions:
+            - com.mahi.order.Exception.OrderServiceException
+              # Whether to fail immediately if max attempts are reached
+        failAfterMaxAttempts: true
+              # Event buffer size (for metrics)
+        eventConsumerBufferSize: 100
+
+logging:
+  level:
+    # Set the logging level for your specific Feign client interface
+    com.mahi.order.Feign.ProductFeign: DEBUG
+

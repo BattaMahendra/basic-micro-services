@@ -2,18 +2,24 @@ package com.mahi.order.Feign;
 
 
 import com.mahi.order.entity.Product;
+import io.github.resilience4j.retry.annotation.Retry;
+import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /*
 * If you are using Eureka server for registry then in the below line you can omit url part.
 * As feign automatically configures the url from eureka registry*/
-@FeignClient(name = "product-details-service", url = "${product.base-uri}" )
+@FeignClient(name = "product-details-service", configuration = FeignLoggingConfig.class)
+@Component
 public interface ProductFeign {
 
-    @GetMapping("/{id}")
+    //@TimeLimiter(name = "product-details-service")
+    @Retry(name = "product-details-service")
+    @GetMapping("/products/{id}")
     public Product getProductById(@PathVariable Long id);
 }
 

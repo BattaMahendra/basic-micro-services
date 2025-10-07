@@ -5,6 +5,7 @@ import com.sample.pds.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/products")
@@ -29,7 +30,12 @@ public class ProductController {
 
     // Get product by id
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Long id) {
+    public Product getProductById(@PathVariable Long id) throws InterruptedException {
+
+        System.out.println("Incoming request for product with id: "+id);
+        if(id == 1){
+            throw new RuntimeException();
+        }
         return productService.getProductById(id);
     }
 

@@ -1,4 +1,4 @@
-package com.mahi.order.Exception;
+package com.mahi.order.exception;
 
 
 
