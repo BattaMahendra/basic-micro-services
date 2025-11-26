@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.mahi.pds.configuration.custom_auto_configuration.auto_config.ProductPricingAutoConfiguration
