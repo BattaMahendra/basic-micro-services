@@ -51,7 +51,7 @@ dependencies {
 
 	//for using xml configs in application
 	//if you place this then by default rest controller returns xml values
-	//implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
 
 	//security
 	implementation 'org.springframework.boot:spring-boot-starter-security'

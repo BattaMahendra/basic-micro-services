@@ -26,7 +26,7 @@ Learn about dependecy injection and Application context here , this article is r
 https://www.marcobehler.com/guides/spring-framework
 
 Inversion Of Control : It is a design principle through which we can create and maintain the objects in a container away
-from the original code implementaion.Which means we are taking control of flow of program(creating and maintaining beans)
+from the original code implementation.Which means we are taking control of flow of program(creating and maintaining beans)
 from the original code and doing it with a spring container. IOC can be achieved through Dependency Injection, Factory design
 pattern and Service locator design pattern.
 

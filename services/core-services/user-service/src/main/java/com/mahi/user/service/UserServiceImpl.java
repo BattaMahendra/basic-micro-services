@@ -7,6 +7,9 @@ import com.mahi.user.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +33,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional // Ensures the entire method runs in a single transaction.
+    // when we update something then the below method is executed and also the new result is stored in cache manager "users"
+    @CachePut(value = "users", key = "#result.id")
     public User createUser(User user) {
         log.info("Creating a new user with email: {}", user.getEmail());
         User savedUser = userRepository.save(user);
@@ -39,6 +44,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
+    // when we update something then the below method is executed and also the new result is stored in cache manager "users"
+    @CachePut(value = "users", key = "#id")
     public User updateUser(Long id, User userDetails) {
         log.info("Attempting to update user with ID: {}", id);
         // Key Change: Fetch the user first or throw a clear exception.
@@ -55,6 +62,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Cacheable(value = "users")      // Caches the List of users into "users" cache manager
     @Transactional(readOnly = true) // Optimization for read-only operations.
     public List<User> getAllUsers() {
         log.info("Fetching all users.");
@@ -62,6 +70,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Cacheable(value = "usersById", key = "#id", unless = "#result == null")  // Caches the User by id and doesn't cache if result is null
     @Transactional(readOnly = true)
     public User getUserById(Long id) { // Corrected method name
         log.info("Fetching user with ID: {}", id);
@@ -72,6 +81,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
+    @CacheEvict(value = "usersById", key = "#id")
     public void deleteUser(Long id) {
         log.warn("Attempting to delete user with ID: {}", id);
         // Key Change: Check for existence before deleting to provide a better error.
