@@ -2,7 +2,7 @@ Spring boot
 
 Spring:
 At its core, Spring framework is really just a dependency injection container, with a couple of convenience layers (think: database access, proxies, aspect-oriented programming, RPC, a web mvc framework) added on top.
-It helps you build Java application faster and more conveniently.
+It helps you build Java application faster and more conveniently. It even helps you to read properties files using annotation @PropertyResources
 
 Spring MVC:
 On a very high-level it allows you to turn your Spring application into a web application with the help of a DispatcherServlet that routes to @Controller classes.

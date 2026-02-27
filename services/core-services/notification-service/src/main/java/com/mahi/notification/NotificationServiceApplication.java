@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@EnableEurekaClient  //not needed for higher spring boot versions
 public class NotificationServiceApplication {
 
 	public static void main(String[] args) {
@@ -12,3 +11,12 @@ public class NotificationServiceApplication {
 	}
 
 }
+
+
+/*
+*
+* This application is not a web server. This doesn't run on Tomcat server
+* It doesn't have spring-starter-web dependency
+* It only runs on command line and not on any port.
+* It receives messages and prints
+* */
