@@ -1,6 +1,8 @@
 package com.mahi.pds.configuration;
 
 
+import com.mahi.pds.configuration.custom_auto_configuration.pricing_strategy.FestivalPriceCalculator;
+import com.mahi.pds.configuration.custom_auto_configuration.pricing_strategy.PriceCalculator;
 import com.mahi.pds.utils.MyService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.*;
@@ -10,6 +12,10 @@ import org.springframework.core.annotation.Order;
 public class BeanConfig {
 
 
+    @Bean
+    public PriceCalculator getPriceCalculator(){
+        return new FestivalPriceCalculator();
+    }
 
     @Bean
     @Qualifier("singleton")

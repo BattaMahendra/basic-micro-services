@@ -14,7 +14,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 @AutoConfiguration
-@EnableConfigurationProperties(ProductPricingProperties.class)
+@EnableConfigurationProperties(ProductPricingProperties.class) //creates a bean of ProductPricingProperties and injects it into this class directly
 @ConditionalOnProperty(
         prefix = "product.pricing",
         name = "enabled",
@@ -25,7 +25,8 @@ public class ProductPricingAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(PriceCalculator.class)  // Create this if only there is no user defined PriceCalculator bean
-    public PriceCalculator priceCalculator(ProductPricingProperties props) {
+    public PriceCalculator priceCalculator(ProductPricingProperties props)   //props is directly injected because of @EnableConfigurationProperties
+    {
         String strategy = props.getStrategy().toLowerCase();
 
         return strategy.equals("festival")? new FestivalPriceCalculator()

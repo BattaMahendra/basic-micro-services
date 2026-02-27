@@ -14,8 +14,8 @@ package com.mahi.pds.configuration.custom_auto_configuration;
  * 1. We will set up base interface and define various strategies
  * 2. We need bean based on the value passed in application.properties
  * 3. Set up @ConfigurationProperties class to inject props into class fields
- * 4. Set up auto-configuration class with required annotations and required @Conditional annotation checks
- * 5. Finally register the auto configuration in src/main/resources/META-INF/spring.factories
+ * 4. Set up @AutoConfiguration class with required annotations and required @Conditional annotation checks
+ * 5. Finally register the autoconfiguration in src/main/resources/META-INF/spring.factories
  *
  *
  * Then everything is setup

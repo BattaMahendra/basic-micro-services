@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 
 @Slf4j
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.sample.pds"})
+@ComponentScan(basePackages = {"com.mahi.pds"})
 //this annotation is used to load properties into fields of TestConfig class
 @EnableConfigurationProperties(TestConfig.class)
 

@@ -79,4 +79,10 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/test")
+    public String test(){
+        if(true) throw new NullPointerException("NPE");
+        return "Hello";
+    }
 }
