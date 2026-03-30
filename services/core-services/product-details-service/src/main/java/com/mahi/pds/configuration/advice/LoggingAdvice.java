@@ -18,12 +18,31 @@ public class LoggingAdvice {
 
 
 
-//    @Pointcut(value="execution(* com.sample.pds.*.*.*(..) )")
-//    public void myPointcut() {
-//
-//    }
+    /*
+    * Pointcut refers to the place where exactly the aop logic should be applied
+    *
+    * We have seperated it because we can use this method point cut in various other advices
+    *
+    * eg: @Before("myPointcut()") instead of writing @Before("execution(* com.sample.pds.*.*.*(..) )")
+    *     @After("myPointcut()")
+    *     @AfterReturning("myPointcut()")
+     *    @AfterThrowing("myPointcut()")
+     *    @Around("myPointcut()")
+     *
+     *    we can use this point cut in all the above advices
+     *
+    * */
+    @Pointcut(value="execution(* com.sample.pds.*.*.*(..) )")
+    public void myPointcut() {
 
-  //  @Around("myPointcut()")
+    }
+
+    /*
+    * Around is one of advice means what needs to be applied in the pointcut
+    * we have @Before and @After etc..
+    * */
+
+    @Around("myPointcut()")
     public Object applicationLogger(ProceedingJoinPoint pjp) throws Throwable {
         ObjectMapper mapper = new ObjectMapper();
         String methodName = pjp.getSignature().getName();

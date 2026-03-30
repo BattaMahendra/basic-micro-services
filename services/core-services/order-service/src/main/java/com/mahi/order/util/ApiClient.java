@@ -14,7 +14,8 @@ public class ApiClient {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${user.base-uri}")
+
+    @Value("${user.base-uri:http://localhost:801/users/}")
     private String baseUri;
 
     @CircuitBreaker(name = "user-service", fallbackMethod = "getDefaultUserDetails")

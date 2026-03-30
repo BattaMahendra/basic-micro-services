@@ -25,7 +25,7 @@ spring.jpa.properties.hibernate.format_sql: true
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://${EUREKA_SERVER_URL:localhost}:8761/eureka/
   instance:
     prefer-ip-address: true # Now Eureka will register your service as http://192.168.x.x:801 (your LAN IP) instead of Batta_Mahendra:801.
 

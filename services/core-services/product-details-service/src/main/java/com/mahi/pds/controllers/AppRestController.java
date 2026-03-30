@@ -14,6 +14,12 @@ import java.util.List;
 @RestController //==> @controller + @ResponseBody
 public class AppRestController {
 
+    /*
+        @ResponseBody  ==> Tells Spring that the return value of the methods should be written directly into
+        the HTTP response body (usually as JSON or XML), rather than looking for a HTML view/template to render.
+     *  @Controller ==> Marks the class as a web requester handler.
+     */
+
     @Autowired
     AppServiceImpl appService;
 

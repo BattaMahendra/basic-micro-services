@@ -1,0 +1,76 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/micro_services_order_db
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_URL:localhost}:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+# Feign Configuration
+feign:
+  circuitbreaker:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+
+user:
+  base-uri: http://user-service/users/
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      product-details-service:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+      user-service:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+  retry:
+    instances:
+      product-details-service:
+        maxAttempts: 3
+        waitDuration: 1s
+      user-service:
+        maxAttempts: 3
+        waitDuration: 1s
+  timelimiter:
+    instances:
+      product-details-service:
+        timeoutDuration: 2s
+      user-service:
+        timeoutDuration: 2s
+  ratelimiter:
+    instances:
+      createOrderRateLimiter:
+        limitForPeriod: 5        # Maximum number of requests allowed - 5 requests allowed every 10 seconds
+        limitRefreshPeriod: 10s  # Time window after which the request count resets
+        timeoutDuration: 0ms     # How long a request waits if limit is reached (0ms = reject immediately)

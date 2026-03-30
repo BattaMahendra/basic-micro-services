@@ -1,8 +1,10 @@
 package com.mahi.pds.controllers;
 
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.net.http.HttpClient;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +67,7 @@ public class LearningController {
     * you can also experiment with consumes*/
 
     @GetMapping(value = "/text", produces = "text/plain")
+    //@RequestMapping(value = "/text2", method = RequestMethod.GET, produces = "text/plain")
     public String getText() {
         return "Plain text response";
     }
