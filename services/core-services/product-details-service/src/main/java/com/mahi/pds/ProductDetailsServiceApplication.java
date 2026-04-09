@@ -14,6 +14,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 
 import java.math.BigDecimal;
+import java.util.concurrent.ThreadPoolExecutor;
 
 @Slf4j
 @SpringBootApplication
@@ -38,6 +39,9 @@ public class ProductDetailsServiceApplication {
 		* Custom auto configuration test*/
 		PriceCalculator priceCalculator = context.getBean(PriceCalculator.class);
 		ProductDetailsServiceApplication.log.warn("Final price: " + priceCalculator.calculatePrice(new BigDecimal("100")));
+
+
+
 
 
 	}

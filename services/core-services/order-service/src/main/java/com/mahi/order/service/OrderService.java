@@ -9,6 +9,7 @@ import com.mahi.order.entity.Product;
 import com.mahi.order.entity.User;
 import com.mahi.order.model.OrderDetail;
 import com.mahi.order.util.ApiClient;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -35,7 +36,8 @@ public class OrderService {
         this.producer= producer;
     }
 
-
+// we can apply ratelimiting to this method as well using resilience 4j
+    @RateLimiter(name = "createOrderRateLimiter", fallbackMethod = "createOrderFallback")
     public OrderDetail createOrder(int userId, int productId){
 
         OrderDetail orderDetail = new OrderDetail();
@@ -73,6 +75,10 @@ public class OrderService {
         else producer.sendMessage("Order fetching is not successful");
 
         return orderDetail;
+    }
+
+    public OrderDetail createOrderFallback(int userId, int productId, Throwable t) {
+        throw new OrderServiceException("Too many requests - please try again later", t);
     }
 
     public Product getProduct(long productId) {

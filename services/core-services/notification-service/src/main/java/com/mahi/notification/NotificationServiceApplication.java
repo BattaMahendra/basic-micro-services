@@ -18,5 +18,5 @@ public class NotificationServiceApplication {
 * This application is not a web server. This doesn't run on Tomcat server
 * It doesn't have spring-starter-web dependency
 * It only runs on command line and not on any port.
-* It receives messages and prints
+* It receives messages and prints them on console
 * */
